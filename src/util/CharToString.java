@@ -1,6 +1,6 @@
 package util;
 
-public class charToString {
+public class CharToString {
 
     public static String charToString(char[] chars) {
         int len = 0;

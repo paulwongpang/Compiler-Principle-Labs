@@ -1,25 +1,22 @@
-package io;
+package les;
 
 import util.Token;
+import util.Words;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static io.Input.getInput;
-import static io.Output.output;
-import static util.charToString.charToString;
+import static les.Input.getInput;
+import static les.Output.output;
+import static util.CharToString.charToString;
 
 public class Main {
 
-    private static int code;// 单词种别码
+    private static int code;
     private static char[] characters;
     private static char input[] = new char[500];
     private static int index;
     private static int number;
-
-    //reverse words
-    private static String[] reservedWords = new String[]{"class", "public", "protected", "private", "void", "static", "int",
-            "char", "float", "double", "String", "if", "else", "switch", "case", "for", "do", "while", "try", "catch"};
 
     public static void main(String[] args) {
 
@@ -86,8 +83,8 @@ public class Main {
                 ch = input[index++];
                 characters[subIndex] = '\0';
 
-                for (int i = 0; i < reservedWords.length; i++) {
-                    if (charToString(characters).equals(reservedWords[i])) {
+                for (int i = 0; i < Words.reservedWords.length; i++) {
+                    if (charToString(characters).equals(Words.reservedWords[i])) {
                         code = i + 1;
                         index--;
                         return;
@@ -105,20 +102,22 @@ public class Main {
 
             while (ch >= '0' && ch <= '9') {
                 number = number * 10 + ch - '0';
-                ch = input[index++];
-            }
-            index--;
-            code = 57;
 
-            // ERROR: num is too large
-            if (number < 0) {
-                code = -2;
+                // ERROR: num is too large
+                if (number < 0) {
+                    code = -2;
+                    break;
+                }
+                ch = input[index++];
+                code = 57;
             }
+
+            index--;
 
             // SITUATION 3: other situation
         } else {
             int subIndex = 0;
-            characters[subIndex++] = ch; // ???? subIndex=0 ???
+            characters[subIndex++] = ch;
 
             switch (ch) {
                 case '+':
@@ -140,15 +139,16 @@ public class Main {
                         while (ch >= '0' && ch <= '9') {
                             number = number * 10 + ch - '0';
                             ch = input[index++];
+
+                            //ERROR: number is too large
+                            if (number < 0) {
+                                code = -2;
+                            }
+
+                            code = 57;
                         }
 
                         index--;
-                        code = 57;
-
-                        //ERROR: number is too large
-                        if (number < 0) {
-                            code = -2;
-                        }
                         number *= -1;
                     } else if (ch == '=') { // -=
                         code = 25;

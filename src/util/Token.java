@@ -18,9 +18,9 @@ public class Token {
 
     public String toString() {
         if (this.error != null) {
-            return "Error:" + this.error;
+            return this.error;
         } else {
-            return "<" + this.code + "," + this.string + ">";
+            return "<" + this.string + ", " + this.code + ">";
         }
     }
 }
