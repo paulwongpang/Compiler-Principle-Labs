@@ -1,13 +1,13 @@
 package io;
 
-import model.Token;
+import util.Token;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static io.Input.getInput;
 import static io.Output.output;
-import static io.charToString.charToString;
+import static util.charToString.charToString;
 
 public class Main {
 

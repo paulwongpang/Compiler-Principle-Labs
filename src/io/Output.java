@@ -1,6 +1,6 @@
 package io;
 
-import model.Token;
+import util.Token;
 
 import java.io.BufferedWriter;
 import java.io.File;
