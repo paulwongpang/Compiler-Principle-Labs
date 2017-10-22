@@ -55,6 +55,9 @@ public class Main {
                     output.add(new Token("ERROR: Undefined character at row " + row));
                     break;
 
+                case -4:
+                    break;
+
                 default: // characters
                     output.add(new Token(code, charToString(characters)));
                     break;
@@ -81,18 +84,16 @@ public class Main {
             while ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
                 characters[subIndex++] = ch;
                 ch = input[index++];
-                characters[subIndex] = '\0';
+            }
 
-                for (int i = 0; i < Words.reservedWords.length; i++) {
-                    if (charToString(characters).equals(Words.reservedWords[i])) {
-                        code = i + 1;
-                        index--;
-                        return;
-                    }
+            for (int i = 0; i < Words.reservedWords.length; i++) {
+                if (charToString(characters).equals(Words.reservedWords[i])) {
+                    code = i + 1;
+                    index--;
+                    return;
                 }
             }
 
-            characters[subIndex++] = '\0';
             index--;
             code = 56;
 
@@ -302,6 +303,10 @@ public class Main {
 
                 case '\n':
                     code = -1;
+                    break;
+
+                case ' ':
+                    code = -4;
                     break;
 
                 default:

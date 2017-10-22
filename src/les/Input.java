@@ -14,7 +14,7 @@ public class Input {
         while (null != (line = br.readLine())) {
             tempChars = line.toCharArray();
             for (char c : tempChars) {
-                if (c == ' ' || c == '\t') {
+                if (c == '\t') {
                     continue;
                 }
                 input[index++] = c;
