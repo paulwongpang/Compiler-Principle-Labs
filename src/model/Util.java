@@ -30,6 +30,8 @@ public class Util {
             if (chars[i] != '\0')
                 len++;
         }
+
         return String.valueOf(chars).substring(0, len);
     }
 }
+

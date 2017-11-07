@@ -9,18 +9,23 @@ public class Production {
         this.right = right;
     }
 
+    public String[] getRight() {
+        return right;
+    }
+
     /**
      * 产生式转化为字符串
+     *
      * @return
      */
     public String toString() {
         String res = left + " -> ";
         if (right != null) {
-            for (String image : right) {
-                res = res + image + " ";
+            for (String s : right) {
+                res += (s + " ");
             }
         } else {
-            res = res + "ε";
+            res += "ε";
         }
         return res;
     }

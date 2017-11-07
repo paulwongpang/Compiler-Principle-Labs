@@ -1,9 +1,6 @@
 package model;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PPT {
     private Map<String, Integer[]> PPT;
@@ -30,6 +27,7 @@ public class PPT {
         PPT.put("COP", new Integer[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 28, 29, 30, 31, 32, 33, -1, -1, -1, -1});
 
         // 构造productionList
+        productionList = new ArrayList<>();
         productionList.add(new Production("S", new String[]{"id", "=", "E", ";", "S"})); // S -> id=E;S
         productionList.add(new Production("S", new String[]{"if", "(", "C", ")", "{", "S", "}", "S"})); // S -> if (C) {S} S
         productionList.add(new Production("S", new String[]{"while", "(", "C", ")", "{", "S", "}", "S"})); // S -> while (C) {S} S
@@ -55,8 +53,8 @@ public class PPT {
         productionList.add(new Production("D'", null)); // D’ -> ε
         productionList.add(new Production("H", new String[]{"(", "C", ")"})); // H -> (C)
         productionList.add(new Production("H", new String[]{"K", "COP", "K"})); //  H -> K COP K
-        productionList.add(new Production("K", new String[]{"id"})); // K -> id
         productionList.add(new Production("K", new String[]{"num"})); // K -> num
+        productionList.add(new Production("K", new String[]{"id"})); // K -> id
         productionList.add(new Production("COP", new String[]{">"})); // COP -> >
         productionList.add(new Production("COP", new String[]{">="})); // COP -> >=
         productionList.add(new Production("COP", new String[]{"<"})); // COP -> <
@@ -66,7 +64,6 @@ public class PPT {
     }
 
     /**
-     *
      * @param Vt
      * @param State
      * @return
@@ -74,7 +71,8 @@ public class PPT {
     public Production findProduction(String Vt, String State) {
         Integer[] row = PPT.get(State);
         int index = Arrays.asList(Util.Vts).indexOf(Vt);
-        if (row[index] > 0) {
+
+        if (row != null && row[index] > 0) {
             return productionList.get(row[index] - 1);
         } else {
             return null;

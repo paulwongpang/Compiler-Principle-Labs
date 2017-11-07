@@ -8,22 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lex.Input.getInput;
-import static lex.Output.output;
 import static model.Util.charToString;
 
 public class Lex {
 
-    private static int code;
-    private static char[] characters;
-    private static char input[] = new char[500];
-    private static int index;
-    private static int number;
-    private static List<Token> output;
+    private int code;
+    private char[] characters;
+    private char input[] = new char[500];
+    private int index;
+    private int number;
+    private List<Token> output;
 
-    public static void main(String[] args) {
+    public void lex() {
 
         output = new ArrayList<>();
-        String inputFile = "test1.txt";
+        String inputFile = "test2.txt";
 
         // input
         try {
@@ -67,14 +66,14 @@ public class Lex {
         }
 
         // output
-        try {
-            output(output, inputFile);
-        } catch (IOException e2) {
-            e2.printStackTrace();
-        }
+//        try {
+//            output(output, inputFile);
+//        } catch (IOException e2) {
+//            e2.printStackTrace();
+//        }
     }
 
-    private static void scanner() {
+    private void scanner() {
         characters = new char[20];
         char ch = input[index];
         index++;
@@ -230,7 +229,7 @@ public class Lex {
                     ch = input[index++];
                     if (ch == '&') { // &&
                         code = 33;
-                        characters[++subIndex] = ch;
+                        characters[subIndex++] = ch;
                     } else { // &
                         code = 32;
                         index--;
@@ -241,7 +240,7 @@ public class Lex {
                     ch = input[index++];
                     if (ch == '|') { // ||
                         code = 35;
-                        characters[++subIndex] = ch;
+                        characters[subIndex++] = ch;
                     } else { // |
                         code = 34;
                         index--;
@@ -252,7 +251,7 @@ public class Lex {
                     ch = input[index++];
                     if (ch == '=') { // !=
                         code = 37;
-                        characters[++subIndex] = ch;
+                        characters[subIndex++] = ch;
                     } else { // !
                         code = 36;
                         index--;
@@ -319,6 +318,7 @@ public class Lex {
     }
 
     public List<Token> getTokens() {
+        lex();
         return output;
     }
 }

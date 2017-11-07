@@ -22,4 +22,12 @@ public class Token {
             return "<" + this.string + ", " + this.code + ">";
         }
     }
+
+    public String getString() {
+        return string;
+    }
+
+    public int getCode() {
+        return code;
+    }
 }
