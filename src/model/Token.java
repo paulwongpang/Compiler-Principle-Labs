@@ -1,4 +1,4 @@
-package util;
+package model;
 
 public class Token {
     private int code;
@@ -12,7 +12,6 @@ public class Token {
     }
 
     public Token(String error) {
-
         this.error = error;
     }
 

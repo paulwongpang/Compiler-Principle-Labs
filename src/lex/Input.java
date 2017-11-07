@@ -1,4 +1,4 @@
-package les;
+package lex;
 
 import java.io.*;
 

@@ -1,16 +1,16 @@
-package les;
+package lex;
 
-import util.Token;
+import model.Token;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Output {
 
-    public static void output(ArrayList<Token> output, String inputFile) throws IOException {
+    public static void output(List<Token> output, String inputFile) throws IOException {
 
         String[] splits = inputFile.split("\\.");
         File outputFile = new File(splits[0] + "_result.txt");

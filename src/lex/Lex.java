@@ -1,26 +1,28 @@
-package les;
+package lex;
 
-import util.Token;
-import util.Words;
+import model.Token;
+import model.Util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import static les.Input.getInput;
-import static les.Output.output;
-import static util.CharToString.charToString;
+import static lex.Input.getInput;
+import static lex.Output.output;
+import static model.Util.charToString;
 
-public class Main {
+public class Lex {
 
     private static int code;
     private static char[] characters;
     private static char input[] = new char[500];
     private static int index;
     private static int number;
+    private static List<Token> output;
 
     public static void main(String[] args) {
 
-        ArrayList<Token> output = new ArrayList<>();
+        output = new ArrayList<>();
         String inputFile = "test1.txt";
 
         // input
@@ -86,8 +88,8 @@ public class Main {
                 ch = input[index++];
             }
 
-            for (int i = 0; i < Words.reservedWords.length; i++) {
-                if (charToString(characters).equals(Words.reservedWords[i])) {
+            for (int i = 0; i < Util.reservedWords.length; i++) {
+                if (charToString(characters).equals(Util.reservedWords[i])) {
                     code = i + 1;
                     index--;
                     return;
@@ -314,5 +316,9 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public List<Token> getTokens() {
+        return output;
     }
 }
